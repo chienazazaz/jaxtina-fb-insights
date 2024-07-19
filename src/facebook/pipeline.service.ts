@@ -112,14 +112,14 @@ export const createPipelineTasks = async ({
     }
 
     const businessObjs = await Promise.all(
-      Object.values(BUSINESSES).map((id) => getBusinessObjects(type, { id }))
+      Object.values(BUSINESSES).map((id) => getBusinessObjects(type, { id: id as string }))
     ).then((obj) => [...obj.flat()]);
 
-    if(type === "ad_accounts") {
+    if(type === "ad_accounts" && Object.keys(PERSONAL_AD_ACCOUNTS).length > 0) {
       businessObjs.push(
         ...Object.entries(PERSONAL_AD_ACCOUNTS).map(([k, v]) => ({
           id: `act_${v}`,
-          account_id: v,
+          account_id: v as string,
           name: k,
         }))
       )
