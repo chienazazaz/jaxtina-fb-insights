@@ -1,4 +1,4 @@
-FROM node:18-bullseye-slim as builder
+FROM --platform=linux/amd64 node:18-bullseye-slim as builder
 
 ENV NODE_ENV build
 RUN npm install -g pnpm
@@ -18,7 +18,7 @@ RUN pnpm prune --prod
 
 # ---
 
-FROM node:18-bullseye-slim
+FROM --platform=linux/amd64 node:18-bullseye-slim
 
 ENV NODE_ENV production
 
