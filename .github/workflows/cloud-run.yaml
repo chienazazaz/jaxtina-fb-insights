@@ -13,7 +13,6 @@ env:
   PUBLIC_URL: https://${{ github.event.repository.name }}-${{ github.ref_name }}-${{secrets.CLOUDRUN_CODE}}-uc.a.run.app
 
   REGION: us-central1
-  GCP_SA: chienle-sa@${{secrets.PROJECT_ID}}.iam.gserviceaccount.com
 
   ENV_FILE: env.yml
 
@@ -51,7 +50,7 @@ jobs:
           --memory=8Gi
           --cpu=2
           --platform=managed
-          --service-account=${{ env.GCP_SA }}
+          --service-account=${{secrets.GCP_SA}}
           --region=${{ env.REGION }}
           --timeout=3500
           --env-vars-file=${{ env.ENV_FILE }}
